@@ -62,10 +62,9 @@ class ContactController extends Controller
                 Yii::$app->session->setFlash('success', "Контакт сохранён");
                 return $this->redirect(['index', 'id' => $model->id]);
             }
-            $phones = $model->getNewPhones();
+            $phones = array_values($model->getNewPhones());
             Yii::$app->session->setFlash('error', "Данные введены не верно");
         }
-
 
         return $this->render('update', [
             'model' => $model,
@@ -91,7 +90,7 @@ class ContactController extends Controller
                 Yii::$app->session->setFlash('success', "Контакт сохранён");
                 return $this->redirect(['index', 'id' => $model->id]);
             }
-            $phones = $model->getNewPhones();
+            $phones = array_values($model->getNewPhones());
             Yii::$app->session->setFlash('error', "Данные введены не верно");
         }
 

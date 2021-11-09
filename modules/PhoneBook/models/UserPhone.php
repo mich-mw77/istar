@@ -31,7 +31,7 @@ class UserPhone extends \yii\db\ActiveRecord
         return [
             [['user_id', 'phone'], 'required'],
             [['user_id'], 'integer'],
-            ['phone', 'match', 'pattern'=>'/^\+?\d{10,12}$/', 'message' => 'Номер введен не верно' ],
+            ['phone', 'match', 'pattern'=>'/^(\d{10}|\+\d{12})$/', 'message' => 'Номер введен не верно' ],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }

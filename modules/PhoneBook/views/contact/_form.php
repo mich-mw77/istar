@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <div id="phones">
         <div id="div_phone_0"><label class="control-label" for="user-date_of_birth">Номер</label>
-            <input pattern="([+])?[0-9]{10,12}" id="phone_0" class="form-control" type="tel"
+            <input pattern="(([+])[0-9]{12}|[0-9]{10})" id="phone_0" class="form-control" type="tel"
                    name="User[newPhones][0]" required>
             <a onclick="deletePhoneInput(0)" class="deletePhoneInput">Удалить</a>
         </div>
@@ -53,24 +53,28 @@ use yii\widgets\ActiveForm;
 
     $(document).ready(function () {
         phones = <?php echo json_encode($phones); ?>;
-
         phones.forEach(element => {
-            if (phoneId !== 0) {
-                addInput();
+            if (phoneId !==0){
+                appendInput();
             }
             $("#phone_" + phoneId).val(element);
             phoneId++;
         });
     })
 
-    function addInput() {
+    function appendInput() {
         let input = '<div id="div_phone_' + phoneId + '">' +
             '<label class="control-label" for="user-date_of_birth">Номер</label>' +
-            '<input pattern="([+])?[0-9]{10,12}" id="phone_' + phoneId + '" class="form-control"  type="tel" name="User[newPhones][' + phoneId + ']"/>' +
+            '<input pattern="(([+])[0-9]{12}|[0-9]{10})" id="phone_' + phoneId + '" class="form-control"  type="tel" name="User[newPhones][' + phoneId + ']"/>' +
             '<a onclick="deletePhoneInput(' + phoneId + ')" class="deletePhoneInput" >Удалить</a>' +
             '</div>';
 
         $("#phones").append(input);
+    }
+
+    function addInput() {
+        phoneId++;
+        appendInput();
     }
 
     function deletePhoneInput(phoneId) {
